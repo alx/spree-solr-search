@@ -1,7 +1,7 @@
 Product.class_eval do
   acts_as_solr  :fields => [:name, :description, :is_active, {:price => :float}, 
-                            :taxon_ids, :price_range, :taxon_names,
-                            :brand_property, :color_option, :size_option],
+                            :taxon_ids, :taxon_names,
+                            :brand_option, :color_option, :size_option, :age_option],
                 :facets=>[:taxon_names, :brand_option, :color_option, :size_option, :age_option]
 
   def taxon_ids
