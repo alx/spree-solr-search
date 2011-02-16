@@ -4,7 +4,7 @@ module Spree::Search
 
     def get_products_conditions_for(base_scope, query)
       facets = {
-          :fields => [:taxon_names, :brand_option, :color_option, :size_option, :age_option],
+          :fields => [:brand_option, :color_option, :size_option, :age_option],
           :browse => @properties[:facets_hash].map{|k,v| "#{k}:#{v}"},
           :zeros => false 
       }
