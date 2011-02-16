@@ -2,8 +2,7 @@ Product.class_eval do
   acts_as_solr  :fields => [:name, :description, :is_active, {:price => :float}, 
                             :taxon_ids, :price_range, :taxon_names,
                             :brand_property, :color_option, :size_option],
-                :facets=>[:price_range, :taxon_names,
-                          :brand_property, :color_option, :size_option]
+                :facets=>[:taxon_names, :brand_option, :color_option, :size_option, :age_option]
 
   def taxon_ids
     taxons.map(&:id)
@@ -37,10 +36,8 @@ Product.class_eval do
     end
   end
   
-  def brand_property
-    pp = ProductProperty.first(:joins => :property, 
-          :conditions => {:product_id => self.id, :properties => {:name => 'brand'}})
-    pp ? pp.value : ''
+  def brand_option
+    get_option_values('brand')
   end
 
   def color_option
@@ -49,6 +46,10 @@ Product.class_eval do
 
   def size_option
     get_option_values('size')
+  end
+  
+  def age_option
+    get_option_values('age')
   end
   
   def get_option_values(option_name)
